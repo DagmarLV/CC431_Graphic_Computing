@@ -62,8 +62,8 @@ while check:
     cv2.waitKey(10)
 
 for e in espacios_time:
-    if rect.ocupado:
-        rect.tiempo_acumulado += rect.tiempo_ocupado%60
+    if e.ocupado:
+        e.tiempo_acumulado += e.tiempo_ocupado%60
     
 i = 1
 for e in espacios_time:
