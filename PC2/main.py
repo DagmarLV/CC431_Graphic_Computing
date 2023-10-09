@@ -39,7 +39,7 @@ def prepare_dataset():
       filelist = glob.glob('{}/*.png'.format(digit))
       images_read = io.concatenate_images(io.imread_collection(filelist))
       images_read = images_read[:, :, :, 3]
-      digits_read = np.array([digit] * images_read.shape[0])
+      digits_read = np.array([d.index(digit)] * images_read.shape[0], dtype=np.int32)
       images.append(images_read)
       digits.append(digits_read)
     images = np.vstack(images)
@@ -56,8 +56,8 @@ def download_y():
     return send_file('./y.npy')
 
 if __name__ == "__main__":
-    digits = ["owo", "unu", "uwu","7u7"];
+    digits = ["owo", "unu", "uwu","7u7"]
     for d in digits:
         if not os.path.exists(str(d)):
             os.mkdir(str(d))
-    app.run(debug=True)
+    app.run()

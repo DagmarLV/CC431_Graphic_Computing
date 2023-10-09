@@ -17,12 +17,13 @@
 
 
       numero = getRndInteger(0, 10);
-      letra = ["owo", "unu", "uwu","7u7"];
+      letra = ["owo", "unu", "uwu", "7u7"];
       random = Math.floor(Math.random() * letra.length);
       aleatorio = letra[random];
 
       document.getElementById('mensaje').innerHTML  = 'Dibujando un ' + aleatorio;
       document.getElementById('numero').value = aleatorio;
+
 
       $('#myCanvas').mousedown(function (e) {
           mousePressed = true;
