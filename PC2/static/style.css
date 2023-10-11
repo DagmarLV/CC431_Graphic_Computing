@@ -1,12 +1,37 @@
 body {
     background-color: #ffffff;
     font-family: Arial, sans-serif;
+    color:#322935;
 }
 
-h1 {
-    color: #333;
+
+.container {
+    display: flex; /* Utilizamos flexbox para colocar los divs en línea */
 }
 
-p {
-    color: #666;
+.box {
+    width: 50%; /* Dividimos el espacio en dos columnas */
+    height: 786px;
+    background: #E3CCCC;
+    box-sizing: border-box; /* Incluimos el borde en el ancho/altura total */
+    padding: 20px; /* Espacio interior para que no se solapen los bordes */
 }
+
+.box:first-child {
+    margin-top: 10px; /* Margen izquierdo para el segundo div */
+    margin-right: 10px; /* Margen derecho para el primer div */
+    margin-bottom: 10px; /* Margen izquierdo para el segundo div */
+    margin-left: 10px; /* Margen izquierdo para el segundo div */
+    width: 600px; /* Dimensiones personalizadas para el primer div */
+    height: 760px;
+}
+
+.box:last-child {
+    margin-top: 10px; /* Margen izquierdo para el segundo div */
+    margin-bottom: 10px; /* Margen izquierdo para el segundo div */
+    margin-left: 10px; /* Margen izquierdo para el segundo div */
+    margin-right: 10px; /* Margen derecho para el primer div */
+    width: 1000px; /* Dimensiones personalizadas para el primer div */
+    height: 760px;
+}
+

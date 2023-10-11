@@ -1,11 +1,17 @@
 import tempfile
 import os
-from flask import Flask, request, redirect, send_file, render_template
+from flask import Flask, request, redirect, send_file, render_template, jsonify
+from tensorflow.keras.models import load_model
 from skimage import io
 import base64
 import glob
 import numpy as np
+import cv2
 
+
+
+
+value = None
 app = Flask(__name__)
 
 @app.route("/")
@@ -55,6 +61,26 @@ def download_X():
 def download_y():
     return send_file('./y.npy')
 
+
+@app.route('/predict')
+def predict_page():
+    return render_template('predict.html')
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    try:
+        # check if the post request has the file part
+        img_data = request.form.get('myImage').replace("data:image/png;base64,","")
+        valor = 4
+        print("Image charged")
+        return render_template('predict.html',value=valor)  
+            
+    except Exception as err:
+        print("Error occurred")
+        print(err)
+
+   
+        
 if __name__ == "__main__":
     digits = ["owo", "unu", "uwu","7u7"]
     for d in digits:

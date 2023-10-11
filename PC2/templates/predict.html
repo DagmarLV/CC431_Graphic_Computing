@@ -20,7 +20,7 @@
       random = Math.floor(Math.random() * letra.length);
       aleatorio = letra[random];
 
-      document.getElementById('mensaje').innerHTML  = 'Dibujando un ' + aleatorio;
+      document.getElementById('mensaje').innerHTML  = 'Dibujo a predecir ';
       document.getElementById('numero').value = aleatorio;
 
 
@@ -69,7 +69,21 @@
      document.getElementById('myImage').value = canvas.toDataURL();
   }
 
+  
+  function predecir() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/predict", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function() {
+      if (xhr.status === 200) {
+        console.log("mmmm");
+        var response = JSON.parse(xhr.responseText);
+        document.getElementById("message_prediction").innerHTML = "El valor calculado es: " + response.valor;
 
+      }
+    };
+    xhr.send();
+  }
 
 </script>
 <body onload="InitThis();">
@@ -102,17 +116,15 @@
             </div>
 
             <div style="position: relative;width: 200px; height: 200px;">
-                <form method="post" action="upload" onsubmit="javascript:prepareImg();"  enctype="multipart/form-data">
+                <form method="post" action="#" onsubmit="javascript:prepareImg();"  enctype="multipart/form-data">
                 <input id="numero" name="numero" type="hidden" value="">
                 <input id="myImage" name="myImage" type="hidden" value="">
-                <input id="bt_upload" type="submit" value="Enviar" style="position: absolute;z-index: 1; left: 550px; top: 170px;width: 150px; height: 50px;background-color:#EAD3D3;border-radius: 10px;font-family: Candara;font-size: 14px";>
+                <input id="predecir" type="submit" value="Predecir"  style="position: absolute;z-index: 1; left: 550px; top: 170px;width: 150px; height: 50px;background-color:#EAD3D3;border-radius: 10px;font-family: Candara;font-size: 14px";>
                 </form>
             </div> 
 
             <div style="position: relative;width: 200px; height: 200px;">
-                <form method="get" action="prepare">
-                <input id="bt_upload" type = "submit" value="Preparar Data" style="position: absolute;z-index: 1; left: 550px; top: 100px; width: 150px; height: 50px;background-color:#EAD3D3;border-radius: 10px;font-family: Candara;font-size: 14px">
-                </form>
+                <h2 id="message_prediction" style="position: absolute;  z-index: 1; left: 500px;width: 250px; top: 65px;font-size: 36px; font-family: Candara">Predicción: {{value}}</h2>
             </div>
         </div>
     </div>
