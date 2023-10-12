@@ -41,17 +41,21 @@ def prepare_dataset():
     images = []
     d = ["owo", "unu", "uwu","7u7"]
     digits = []
+    print("prueba")
     for digit in d:
+      print("mm")
       filelist = glob.glob('{}/*.png'.format(digit))
       images_read = io.concatenate_images(io.imread_collection(filelist))
       images_read = images_read[:, :, :, 3]
       digits_read = np.array([d.index(digit)] * images_read.shape[0], dtype=np.int32)
       images.append(images_read)
       digits.append(digits_read)
+    print("fuera del for")
     images = np.vstack(images)
     digits = np.concatenate(digits)
     np.save('X.npy', images)
     np.save('y.npy', digits)
+    print("final")
     return "OK!"
 
 @app.route('/X.npy', methods=['GET'])
